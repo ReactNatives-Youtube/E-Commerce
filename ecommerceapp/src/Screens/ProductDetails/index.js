@@ -1,10 +1,14 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
 
 const ProductDetailsScreen = () => {
+  const navigation = useNavigation();
   return (
     <View>
-      <Text>Product Details Screen</Text>
+      <Pressable onPress={() => navigation.navigate('CheckoutProduct')}>
+        <Text>Go To Checkout Screen</Text>
+      </Pressable>
     </View>
   );
 };
