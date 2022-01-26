@@ -4,8 +4,8 @@ import {useNavigation} from '@react-navigation/core';
 const HomeScreen = () => {
   const navigation = useNavigation();
   return (
-    <View>
-      <Pressable onPress={() => navigation.navigate('Details')}>
+    <View style={{flex:1,alignItems:"center",justifyContent:"center"}}>
+      <Pressable onPress={() => navigation.navigate('Details')} >
         <Text>Go To Products</Text>
       </Pressable>
     </View>
