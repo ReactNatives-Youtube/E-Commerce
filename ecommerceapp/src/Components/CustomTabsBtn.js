@@ -1,3 +1,5 @@
+// Resuable Custom Tabs Button
+
 import React, {useEffect, useRef} from 'react';
 import {View, Text, Pressable} from 'react-native';
 import * as Animatable from 'react-native-animatable';
@@ -29,22 +31,21 @@ const TabArr = [
 
 // Custom Tab Button
 const CustomTabsBtn = props => {
-  // console.log(props);
   // Destructuring the props
   const {item, onPress, accessibilityState} = props;
   // Getting focused value on the accessibility State of tabs
   const focused = accessibilityState.selected;
   // creating ref for that particular tab and tab's label
-  const viewRef = useRef(null);
+  const iconRef = useRef(null);
   const textRef = useRef(null);
 
   // UseEffect function to run whenever the value of focused variable changes
   useEffect(() => {
     if (focused) {
-      viewRef.current.animate({0: {scale: 0.5}, 1: {scale: 1}});
+      iconRef.current.animate({0: {scale: 0.5}, 1: {scale: 1}});
       textRef.current.animate({0: {scale: 0.5}, 1: {scale: 1}});
     } else {
-      viewRef.current.animate({0: {scale: 1}, 1: {scale: 0.9}});
+      iconRef.current.animate({0: {scale: 1}, 1: {scale: 0.9}});
       textRef.current.animate({0: {scale: 1}, 1: {scale: 0.5}});
     }
   }, [focused]);
@@ -59,7 +60,7 @@ const CustomTabsBtn = props => {
       }}>
       <View>
         <Animatable.View
-          ref={viewRef}
+          ref={iconRef}
           style={{
             backgroundColor: focused ? TabsClr.alphaClr : TabsClr.primary,
             borderRadius: 8,
