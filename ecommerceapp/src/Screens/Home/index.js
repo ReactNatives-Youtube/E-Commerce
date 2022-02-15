@@ -5,7 +5,6 @@ import {useSelector} from 'react-redux';
 const HomeScreen = () => {
   const navigation = useNavigation();
   const state = useSelector(state => state.Products);
-  console.log(state);
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Pressable onPress={() => navigation.navigate('Details')}>

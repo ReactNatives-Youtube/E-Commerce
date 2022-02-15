@@ -1,19 +1,26 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text} from 'react-native';
+import LottieView from 'lottie-react-native';
+import {useNetInfo} from '@react-native-community/netinfo';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/core';
 import * as Actions from '../../Store/Actions';
-import LottieView from 'lottie-react-native';
 const StartUpScreen = () => {
+  const netInfo = useNetInfo();
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const products = useSelector(state => state.Products);
   const [error, setError] = useState(false);
-  // Getting data from firebase db
+  const [netConnected, setNetConnected] = useState(true);
+  // Getting data from firebase db and checking internet connection
   useEffect(() => {
-    //  dispatch startup action
-    dispatch(Actions.startUp());
-  }, []);
+    if (netInfo.isConnected == false) setNetConnected(false);
+    else if (netInfo.isConnected == true) {
+      setNetConnected(true);
+      //  dispatch startup action
+      dispatch(Actions.startUp());
+    }
+  }, [netInfo]);
 
   // Checking if data has come from db
   useEffect(() => {
@@ -30,7 +37,14 @@ const StartUpScreen = () => {
     return () => clearTimeout(timeout);
   }, [products]);
 
-  return !error ? (
+  return netConnected == false ? (
+    <LottieView
+      source={require('../../Constants/no-internet.json')}
+      autoPlay
+      loop
+      style={{backgroundColor: 'white'}}
+    />
+  ) : !error ? (
     <LottieView
       source={require('../../Constants/shopping-cart.json')}
       autoPlay
