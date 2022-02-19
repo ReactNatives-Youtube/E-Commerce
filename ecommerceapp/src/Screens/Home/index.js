@@ -1,16 +1,26 @@
-import React, {useState} from 'react';
-import {View, Text, Pressable, FlatList} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, Pressable, FlatList, Dimensions, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/core';
 import {useSelector} from 'react-redux';
 import Icon, {Icons} from '../../Components/Icons';
 import CategoryBtn from '../../Components/CategoryBtn';
+import ProductsBtn from '../../Components/ProductsBtn';
 const HomeScreen = () => {
   const navigation = useNavigation();
+
   const Products = useSelector(state => state.Products);
   const Categories = useSelector(state => state.Categories);
   const [selectedCategory, setSelectedCategory] = useState(Categories[0].Name);
+  const [categoryProducts, setCategoryProducts] = useState([]);
+  // Update products whenever category is changed
+  useEffect(() => {
+    setCategoryProducts(
+      Products.filter(ele => ele.category == selectedCategory),
+    );
+  }, [selectedCategory]);
   return (
-    <View style={{backgroundColor: '#fff', flex: 1, padding: 16}}>
+    <View
+      style={{backgroundColor: '#fff', flex: 1, padding: 16, paddingBottom: 0}}>
       {/* Header */}
       {/* Logo */}
       {/* Search bar btn */}
@@ -66,9 +76,19 @@ const HomeScreen = () => {
         />
       </View>
       {/* Product items - Vertical Flat list */}
-      <Pressable onPress={() => navigation.navigate('Details')}>
-        <Text>Go To Products</Text>
-      </Pressable>
+      {categoryProducts.length ? (
+        <FlatList
+          data={categoryProducts}
+          showsVerticalScrollIndicator={false}
+          style={{marginTop: 12, width: '100%'}}
+          renderItem={({index, item}) => <ProductsBtn item={item} />}
+          numColumns={2}
+        />
+      ) : (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+          <Text>Coming soon...</Text>
+        </View>
+      )}
     </View>
   );
 };
