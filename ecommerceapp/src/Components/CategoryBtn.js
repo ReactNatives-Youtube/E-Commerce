@@ -1,6 +1,7 @@
 // Reusable component of Categories-Flatlist-HomeScreen
 import React from 'react';
 import {Pressable} from 'react-native';
+import {HomeScreenClr} from '../Constants/colors';
 import Icon, {Icons} from './Icons';
 const CategoryBtn = props => {
   // Current focus item should be colored orange
@@ -11,7 +12,9 @@ const CategoryBtn = props => {
   return (
     <Pressable
       style={{
-        backgroundColor: inFocus ? '#ec6813' : '#f3f3f3',
+        backgroundColor: inFocus
+          ? HomeScreenClr.categoriesBtnBkgInFocus
+          : HomeScreenClr.categoriesBtnBkgOutOfFocus,
         padding: 8,
         borderRadius: 8,
         marginRight: 16,
@@ -20,7 +23,11 @@ const CategoryBtn = props => {
       <Icon
         type={Icons[iconType]}
         name={iconName}
-        color={inFocus ? '#fff' : '#8a837b'}
+        color={
+          inFocus
+            ? HomeScreenClr.categoriesBtnInFocus
+            : HomeScreenClr.categoriesBtnOutOfFocus
+        }
         size={24}
       />
     </Pressable>

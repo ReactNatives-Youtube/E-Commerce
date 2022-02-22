@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, Pressable, Image, Dimensions} from 'react-native';
+import {HomeScreenClr} from '../Constants/colors';
 import Icon, {Icons} from './Icons';
 const ProductsBtn = ({item}) => {
   const {width, height} = Dimensions.get('window');
@@ -7,7 +8,7 @@ const ProductsBtn = ({item}) => {
     <Pressable
       style={{
         width: '49%',
-        backgroundColor: '#f3f3f3',
+        backgroundColor: HomeScreenClr.productsBtnBkg,
         marginVertical: 4,
         marginRight: 4,
         borderRadius: 20,
@@ -22,7 +23,7 @@ const ProductsBtn = ({item}) => {
         {/* Discount % */}
         <View
           style={{
-            backgroundColor: '#ffffff',
+            backgroundColor: HomeScreenClr.discountBkg,
             borderRadius: 40,
             alignItems: 'center',
             padding: 8,
@@ -31,13 +32,17 @@ const ProductsBtn = ({item}) => {
             style={{
               fontSize: 12,
               fontWeight: 'bold',
-              color: '#000',
+              color: HomeScreenClr.discountTxt,
             }}>
             30% OFF
           </Text>
         </View>
         {/* Like Icon */}
-        <Icon type={Icons.Ionicons} name="heart-sharp" color="#8a837b" />
+        <Icon
+          type={Icons.Ionicons}
+          name="heart-sharp"
+          color={HomeScreenClr.likeIcon}
+        />
       </View>
       {/* Image */}
       <Image
@@ -55,7 +60,7 @@ const ProductsBtn = ({item}) => {
       />
       <View
         style={{
-          backgroundColor: '#fff',
+          backgroundColor: HomeScreenClr.titleBkg,
           padding: 8,
           borderBottomEndRadius: 20,
           borderBottomLeftRadius: 20,
@@ -74,7 +79,7 @@ const ProductsBtn = ({item}) => {
           style={{
             fontSize: 16,
             fontWeight: 'bold',
-            color: '#000',
+            color: HomeScreenClr.price,
           }}>
           ${item.price}
         </Text>

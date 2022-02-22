@@ -5,9 +5,8 @@ import {useSelector} from 'react-redux';
 import Icon, {Icons} from '../../Components/Icons';
 import CategoryBtn from '../../Components/CategoryBtn';
 import ProductsBtn from '../../Components/ProductsBtn';
+import {HomeScreenClr} from '../../Constants/colors';
 const HomeScreen = () => {
-  const navigation = useNavigation();
-
   const Products = useSelector(state => state.Products);
   const Categories = useSelector(state => state.Categories);
   const [selectedCategory, setSelectedCategory] = useState(Categories[0].Name);
@@ -20,7 +19,12 @@ const HomeScreen = () => {
   }, [selectedCategory]);
   return (
     <View
-      style={{backgroundColor: '#fff', flex: 1, padding: 16, paddingBottom: 0}}>
+      style={{
+        backgroundColor: HomeScreenClr.backgroundClr,
+        flex: 1,
+        padding: 16,
+        paddingBottom: 0,
+      }}>
       {/* Header */}
       {/* Logo */}
       {/* Search bar btn */}
@@ -33,20 +37,39 @@ const HomeScreen = () => {
         <Icon
           type={Icons.Ionicons}
           name="ios-logo-react"
-          color="#61dafb"
+          color={HomeScreenClr.logoClr}
           size={40}
         />
         <Pressable
-          style={{backgroundColor: '#f8f8f8', padding: 8, borderRadius: 8}}>
-          <Icon type={Icons.FontAwesome} name="search" color="#000" size={24} />
+          style={{
+            backgroundColor: HomeScreenClr.searchBarBkg,
+            padding: 8,
+            borderRadius: 8,
+          }}>
+          <Icon
+            type={Icons.FontAwesome}
+            name="search"
+            color={HomeScreenClr.searchBarIcon}
+            size={24}
+          />
         </Pressable>
       </View>
       {/* Greetings */}
       <View style={{marginVertical: 12}}>
-        <Text style={{fontSize: 20, color: '#000', fontWeight: 'bold'}}>
+        <Text
+          style={{
+            fontSize: 20,
+            color: HomeScreenClr.heading,
+            fontWeight: 'bold',
+          }}>
           Hello, Nakul
         </Text>
-        <Text style={{fontSize: 16, color: '#a6a6a6', fontWeight: '500'}}>
+        <Text
+          style={{
+            fontSize: 16,
+            color: HomeScreenClr.subHeading,
+            fontWeight: '500',
+          }}>
           Let's get you something!
         </Text>
       </View>
@@ -56,7 +79,7 @@ const HomeScreen = () => {
           style={{
             fontSize: 20,
             fontWeight: '600',
-            color: '#000',
+            color: HomeScreenClr.categoriesTitle,
             marginBottom: 12,
           }}>
           Top Categories
