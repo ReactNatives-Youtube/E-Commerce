@@ -1,9 +1,11 @@
 import React from 'react';
 import {View, Text, Pressable, Image, Dimensions} from 'react-native';
+import {useNavigation} from '@react-navigation/core';
 import {HomeScreenClr} from '../Constants/colors';
 import Icon, {Icons} from './Icons';
 const ProductsBtn = ({item}) => {
   const {width, height} = Dimensions.get('window');
+  const navigation = useNavigation();
   return (
     <Pressable
       style={{
@@ -13,7 +15,8 @@ const ProductsBtn = ({item}) => {
         marginRight: 4,
         borderRadius: 20,
         padding: 12,
-      }}>
+      }}
+      onPress={() => navigation.navigate('Details')}>
       <View
         style={{
           flexDirection: 'row',

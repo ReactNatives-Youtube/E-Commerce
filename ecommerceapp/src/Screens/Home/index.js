@@ -1,13 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, Pressable, FlatList, Dimensions, Image} from 'react-native';
-import {useNavigation} from '@react-navigation/core';
+import React, {useEffect, useRef, useState} from 'react';
+import {View, Text, Pressable, FlatList} from 'react-native';
 import {useSelector} from 'react-redux';
 import Icon, {Icons} from '../../Components/Icons';
 import CategoryBtn from '../../Components/CategoryBtn';
 import ProductsBtn from '../../Components/ProductsBtn';
 import {HomeScreenClr} from '../../Constants/colors';
+import {styles} from './styles';
+import SearchModal from '../../Components/SearchBtn/SearchModal';
+
 const HomeScreen = () => {
   const Products = useSelector(state => state.Products);
+  const [visible, setVisible] = useState(false);
   const Categories = useSelector(state => state.Categories);
   const [selectedCategory, setSelectedCategory] = useState(Categories[0].Name);
   const [categoryProducts, setCategoryProducts] = useState([]);
@@ -18,22 +21,13 @@ const HomeScreen = () => {
     );
   }, [selectedCategory]);
   return (
-    <View
-      style={{
-        backgroundColor: HomeScreenClr.backgroundClr,
-        flex: 1,
-        padding: 16,
-        paddingBottom: 0,
-      }}>
+    <View style={styles.mainContainer}>
+      {/* Search Modal */}
+      <SearchModal visible={visible} showModal={setVisible} />
       {/* Header */}
       {/* Logo */}
       {/* Search bar btn */}
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
+      <View style={styles.headerContainer}>
         <Icon
           type={Icons.Ionicons}
           name="ios-logo-react"
@@ -41,11 +35,8 @@ const HomeScreen = () => {
           size={40}
         />
         <Pressable
-          style={{
-            backgroundColor: HomeScreenClr.searchBarBkg,
-            padding: 8,
-            borderRadius: 8,
-          }}>
+          style={styles.searchContainer}
+          onPress={() => setVisible(true)}>
           <Icon
             type={Icons.FontAwesome}
             name="search"
@@ -75,15 +66,7 @@ const HomeScreen = () => {
       </View>
       {/* Categories - Horizontal flatlist*/}
       <View style={{marginVertical: 8}}>
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: '600',
-            color: HomeScreenClr.categoriesTitle,
-            marginBottom: 12,
-          }}>
-          Top Categories
-        </Text>
+        <Text style={styles.categoryText}>Top Categories</Text>
         <FlatList
           data={Categories}
           horizontal={true}
