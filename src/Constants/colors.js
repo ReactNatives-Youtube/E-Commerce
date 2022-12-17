@@ -6,6 +6,7 @@ const TabsClr = {
   OutOfFocus: '#cccccc',
   primary: '#fff',
 };
+
 const HomeScreenClr = {
   backgroundClr: '#fff',
   logoClr: '#61dafb',
